@@ -20,9 +20,8 @@ function exception_handler() {
   throw new HttpException('<h1>500 Internal Server Error</h1>', 500);
 }
 
-//register_shutdown_function('error_handler');
 set_error_handler('error_handler');
-// set_exception_handler('exception_handler');
+set_exception_handler('exception_handler');
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
