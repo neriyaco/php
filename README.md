@@ -2,5 +2,5 @@
 
 To run this project type in this command
 ```sh
-docker-compose up
+docker-compose up -d --build
 ```
