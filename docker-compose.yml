@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: users_app
+      MYSQL_USER: users_app
+      MYSQL_PASSWORD: your_users_app_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 33306:3306
+
+  php:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    volumes:
+      - ./php:/var/www/html
+      - ./http.conf:/etc/apache2/conf-enabled/http.conf
+    ports:
+      - 8081:80
+    depends_on:
+      - db
+
+volumes:
+  mysql-data:
